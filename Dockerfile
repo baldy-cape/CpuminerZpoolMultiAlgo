@@ -6,7 +6,12 @@ RUN apt-get install -qy build-essential git libtool libjansson-dev libssl-dev li
 RUN git clone https://github.com/JayDDee/cpuminer-opt 
 RUN cd cpuminer-opt && ./build.sh  
 
-CMD ALGOS="allium,argon2d4096,argon2d500,blake2b,blake2s,bmw512,hmq1725,keccak,lyra2z,lyra2z330,m7m,myr-gr,neoscrypt,power2b,quark,qubit,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerr16";\
+RUN apt-get install -y autoconf pkg-config make g++ lib32z1-dev
+RUN git clone https://github.com/cpu-pool/cpuminer-opt-cpupower.git
+RUN chmod +x /cpuminer-opt-cpupower/build.sh
+RUN cd cpuminer-opt-cpupower/ && ./build.sh
+
+CMD ALGOS="allium,argon2d4096,argon2d500,blake2b,blake2s,bmw512,hmq1725,keccak,lyra2z,lyra2z330,m7m,myr-gr,neoscrypt,power2b,quark,qubit,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerr16,cpupower";\
 PAYCOIN="KMD";\
 PAYADDR="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8";\
 while true; \
@@ -46,4 +51,5 @@ do\
  cpuminer-opt/cpuminer  -r 0 -a yespowerr16 -o stratum+tcp://yespowerr16.eu.mine.zpool.ca:6534 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer  -r 0 -a lyra2z330 -o stratum+tcp://lyra2z330.eu.mine.zpool.ca:4563 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer  -r 0 -a yescrypt -o stratum+tcp://yescrypt.eu.mine.zpool.ca:6233 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
+ cpuminer-opt-cpupower/cpuminer  -r 0 -a cpupower -o stratum+tcp://cpupower.eu.mine.zpool.ca:6240 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
 done

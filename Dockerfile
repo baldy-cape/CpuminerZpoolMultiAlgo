@@ -6,7 +6,7 @@ RUN apt-get install -qy build-essential git libtool libjansson-dev libssl-dev li
 RUN git clone https://github.com/JayDDee/cpuminer-opt 
 RUN cd cpuminer-opt && ./build.sh  
 
-RUN apt-get install -y autoconf pkg-config make g++ lib32z1-dev
+RUN apt-get install -qy autoconf g++ lib32z1-dev
 RUN git clone https://github.com/cpu-pool/cpuminer-opt-cpupower.git
 RUN chmod +x /cpuminer-opt-cpupower/build.sh
 RUN cd cpuminer-opt-cpupower/ && ./build.sh

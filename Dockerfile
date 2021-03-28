@@ -14,7 +14,7 @@ RUN cd cpuminer-opt-cpupower/ && ./build.sh
 ADD https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.19/cpuminer-opt-linux.tar.gz /
 RUN tar xvzf /cpuminer-opt-linux.tar.gz
 
-CMD ALGOS="allium,argon2d4096,argon2d500,blake2b,blake2s,bmw512,curve,hmq1725,keccak,lyra2z,lyra2z330,m7m,myr-gr,neoscrypt,power2b,quark,qubit,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerr16,cpupower";\
+CMD ALGOS="allium,argon2d4096,argon2d500,blake2b,blake2s,bmw512,curve,hmq1725,keccak,lyra2z,lyra2z330,m7m,myr-gr,neoscrypt,power2b,quark,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerr16,cpupower";\
 PAYCOIN="KMD";\
 PAYADDR="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8";\
 while true; \
@@ -35,7 +35,7 @@ do\
  cpuminer-opt/cpuminer -r 0 -a neoscrypt -o stratum+tcp://neoscrypt.eu.mine.zpool.ca:4233 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a power2b -o stratum+tcp://power2b.eu.mine.zpool.ca:6242 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a quark -o stratum+tcp://quark.eu.mine.zpool.ca:4033 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
- cpuminer-opt/cpuminer -r 0 -a qubit -o stratum+tcp://qubit.eu.mine.zpool.ca:4733 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
+ #cpuminer-opt/cpuminer -r 0 -a qubit -o stratum+tcp://qubit.eu.mine.zpool.ca:4733 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a scrypt -o stratum+tcp://scrypt.eu.mine.zpool.ca:3433 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a sha256t -o stratum+tcp://sha256t.eu.mine.zpool.ca:3339 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a sha3d -o stratum+tcp://sha3d.eu.mine.zpool.ca:3340 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\

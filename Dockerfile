@@ -11,11 +11,15 @@ RUN git clone https://github.com/cpu-pool/cpuminer-opt-cpupower.git
 RUN chmod +x /cpuminer-opt-cpupower/build.sh
 RUN cd cpuminer-opt-cpupower/ && ./build.sh
 
-CMD ALGOS="allium,argon2d4096,argon2d500,blake2b,blake2s,bmw512,hmq1725,keccak,lyra2z,lyra2z330,m7m,myr-gr,neoscrypt,power2b,quark,qubit,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerr16,cpupower";\
+ADD https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.19/cpuminer-opt-linux.tar.gz /
+RUN tar xvzf /cpuminer-opt-linux.tar.gz
+
+CMD ALGOS="allium,argon2d4096,argon2d500,blake2b,blake2s,bmw512,curve,hmq1725,keccak,lyra2z,lyra2z330,m7m,myr-gr,neoscrypt,power2b,quark,qubit,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerr16,cpupower";\
 PAYCOIN="KMD";\
 PAYADDR="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8";\
 while true; \
 do\
+ /cpuminer-avx2  -r 0 -a curvehash -o stratum+tcp://curve.eu.mine.zpool.ca:6240 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt-cpupower/cpuminer -r 0 -a cpupower -o stratum+tcp://cpupower.eu.mine.zpool.ca:6240 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a allium -o stratum+tcp://allium.eu.mine.zpool.ca:6433 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a argon2d4096 -o stratum+tcp://argon2d4096.eu.mine.zpool.ca:4240 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\

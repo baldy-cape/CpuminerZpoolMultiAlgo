@@ -23,7 +23,7 @@ PAYADDR="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8";\
 while true; \
 do\
  cpuminer-easy/cpuminer -r 0 -a Binarium_hash_v1 -o stratum+tcp://binarium-v1.eu.mine.zpool.ca:6666 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
- /cpuminer-avx2  -r 0 -a curvehash -o stratum+tcp://curve.eu.mine.zpool.ca:6240 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
+ /cpuminer-avx2  -r 0 -a curvehash -o stratum+tcp://curve.eu.mine.zpool.ca:4633 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt-cpupower/cpuminer -r 0 -a cpupower -o stratum+tcp://cpupower.eu.mine.zpool.ca:6240 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a allium -o stratum+tcp://allium.eu.mine.zpool.ca:6433 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
   cpuminer-opt/cpuminer -r 0 -a argon2d500 -o stratum+tcp://argon2d500.eu.mine.zpool.ca:4239 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\

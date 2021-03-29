@@ -11,7 +11,7 @@ RUN git clone https://github.com/cpu-pool/cpuminer-opt-cpupower.git
 RUN chmod +x /cpuminer-opt-cpupower/build.sh
 RUN cd cpuminer-opt-cpupower/ && ./build.sh
 
-ADD https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.19/cpuminer-opt-linux.tar.gz /
+ADD https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.11/cpuminer-opt-linux.tar.gz /
 RUN tar xvzf /cpuminer-opt-linux.tar.gz
 
 RUN git clone https://github.com/binariumpay/cpuminer-easy.git

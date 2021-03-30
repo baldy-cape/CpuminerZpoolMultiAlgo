@@ -11,14 +11,11 @@ RUN git clone https://github.com/cpu-pool/cpuminer-opt-cpupower.git
 RUN chmod +x /cpuminer-opt-cpupower/build.sh
 RUN cd cpuminer-opt-cpupower/ && ./build.sh
 
-ADD https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.11/cpuminer-opt-linux.tar.gz /
-RUN tar xvzf /cpuminer-opt-linux.tar.gz
+RUN git clone https://github.com/curvehashcoin/cpuminer-curvehash
+RUN cd cpuminer-curvehash/ && ./build.sh
 
 RUN git clone https://github.com/binariumpay/cpuminer-easy.git
 RUN cd cpuminer-easy/ && ./build-ubuntu.sh
-
-ADD https://github.com/doktor83/SRBMiner-Multi/releases/download/0.4.0/SRBMiner-Multi-0-4-0-Linux.tar.xz /
-RUN tar vxf SRBMiner-Multi-0-4-0-Linux.tar.xz
 
 CMD ALGOS="allium,argon2d500,binarium-v1,bmw512,curve,hmq1725,keccak,lyra2z,lyra2z330,m7m,myr-gr,neoscrypt,power2b,quark,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerr16,cpupower";\
 PAYCOIN="KMD";\

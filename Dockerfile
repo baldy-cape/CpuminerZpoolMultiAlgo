@@ -12,7 +12,8 @@ RUN chmod +x /cpuminer-opt-cpupower/build.sh
 RUN cd cpuminer-opt-cpupower/ && ./build.sh
 
 RUN git clone https://github.com/curvehashcoin/cpuminer-curvehash
-RUN cd cpuminer-curvehash/ && ./build.sh
+RUN apt-get install zlib1g-dev 
+RUN cd cpuminer-curvehash/ && ./autogen.sh && ./build.sh
 
 RUN git clone https://github.com/binariumpay/cpuminer-easy.git
 RUN cd cpuminer-easy/ && ./build-ubuntu.sh

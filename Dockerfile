@@ -15,8 +15,8 @@ RUN git clone https://github.com/CURVEHASH/cpuminer-curvehash.git
 RUN cd cpuminer-curvehash/; chmod +x autogen.sh build.sh ; ./build.sh
 
 
-RUN git clone https://github.com/binariumpay/cpuminer-easy.git
-RUN cd cpuminer-easy/ && ./build-ubuntu.sh
+RUN git clone https://github.com/bubasik/cpuminer-easy-binarium
+RUN cd cpuminer-easy-binarium/ && ./build-ubuntu.sh
 
 ADD https://raw.githubusercontent.com/baldy-cape/AutomaticAlgoCpuMining/master/test.sh /
 RUN chmod +x /test.sh
@@ -26,7 +26,7 @@ PAYCOIN="KMD";\
 PAYADDR="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8";\
 while true; \
 do\
- cpuminer-easy/cpuminer -r 0 -a Binarium_hash_v1 -o stratum+tcp://binarium-v1.eu.mine.zpool.ca:6666 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
+ cpuminer-easy-binarium/cpuminer -r 0 -a Binarium_hash_v1 -o stratum+tcp://binarium-v1.eu.mine.zpool.ca:6666 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-curvehash/cpuminer -r 0 -a curvehash -o stratum+tcp://curve.eu.mine.zpool.ca:4633 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt-cpupower/cpuminer -r 0 -a cpupower -o stratum+tcp://cpupower.eu.mine.zpool.ca:6240 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a allium -o stratum+tcp://allium.eu.mine.zpool.ca:6433 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\

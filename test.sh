@@ -4,41 +4,40 @@ PAYADDR="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8"
 DURATION=600 # how long to test each algo in seconds
 
 ## allium 
-cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a allium -o stratum+tcp://allium.eu.mine.zpool.ca:6433 -u$PAYADDR -pc=$PAYCOIN
+cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a allium -o stratum+tcp://allium.eu.mine.zpool.ca:6433 -u$PAYADDR -p c=$PAYCOIN
+
 ## argon2d4096
 #GPU only
 
-exit
-
 ## argon2d500u
-Hash rate       8283.32h/s   8301.23h/s   (5957.30h/s)
+cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a argon2d500 -o stratum+tcp://argon2d500.eu.mine.zpool.ca:4239 -u $PAYADDR -p c=$PAYCOIN 
 
 ## bcd
-GPU only
+#GPU only
 
 ## binarium-v1
-./cpuminer-easy/cpuminer -a Binarium_hash_v1 -o stratum+tcp://binarium-v1.eu.mine.zpool.ca:6666 -u RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8 -p c=KMD
+cpuminer-easy/cpuminer --time-limit=$DURATION -r 0 -a Binarium_hash_v1 -o stratum+tcp://binarium-v1.eu.mine.zpool.ca:6666 -u $PAYADDR -p c=$PAYCOIN
 
 ## blake2b
-GPU only 
+#GPU only 
 
 ## blake2s
-GPU only 
+#GPU only 
 
 ## blakecoin
-GPU only 
+#GPU only 
 
 ## bmw512
-36.7 MH/s
+cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a bmw512 -o stratum+tcp://bmw512.eu.mine.zpool.ca:5787 -u $PAYADDR -p c=$PAYCOIN 
 
 ## cpupower
-335.1 H/s
+cpuminer-opt-cpupower/cpuminer --time-limit=$DURATION -r 0 -a cpupower -o stratum+tcp://cpupower.eu.mine.zpool.ca:6240 -u $PAYADDR -p c=$PAYCOIN 
 
 ## curve
-Connects but not accepted using rplant. 
+cpuminer-curvehash/cpuminer --time-limit=$DURATION -r 0 -a curvehash -o stratum+tcp://curve.eu.mine.zpool.ca:4633 -u $PAYADDR -p c=$PAYCOIN 
 
-root@fedora:/SRBMiner-Multi-0-5-8#  ./SRBMiner-MULTI --disable-gpu --algorithm curvehash --pool stratum+tcp://curve.eu.mine.zpool.ca:4633 --wallet RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8 --password c=KMD
-Internet not found! Please insert internet into miner
+exit
+
 
 
 equihash

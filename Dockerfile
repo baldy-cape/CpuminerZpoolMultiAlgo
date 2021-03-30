@@ -18,6 +18,9 @@ RUN cd cpuminer-curvehash/; chmod +x autogen.sh build.sh ; ./build.sh
 RUN git clone https://github.com/binariumpay/cpuminer-easy.git
 RUN cd cpuminer-easy/ && ./build-ubuntu.sh
 
+ADD https://raw.githubusercontent.com/baldy-cape/AutomaticAlgoCpuMining/master/test.sh /
+RUN chmod +x /test.sh
+
 CMD ALGOS="allium,argon2d500,binarium-v1,bmw512,curve,hmq1725,keccak,lyra2z,lyra2z330,m7m,myr-gr,neoscrypt,power2b,quark,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerr16,cpupower";\
 PAYCOIN="KMD";\
 PAYADDR="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8";\

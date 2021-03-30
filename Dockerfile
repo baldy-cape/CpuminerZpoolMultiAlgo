@@ -17,7 +17,10 @@ RUN tar xvzf /cpuminer-opt-linux.tar.gz
 RUN git clone https://github.com/binariumpay/cpuminer-easy.git
 RUN cd cpuminer-easy/ && ./build-ubuntu.sh
 
-CMD ALGOS="allium,argon2d500,binarium-v1,blake2b,blake2s,bmw512,curve,hmq1725,keccak,lyra2z,lyra2z330,m7m,myr-gr,neoscrypt,power2b,quark,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerr16,cpupower";\
+ADD https://github.com/doktor83/SRBMiner-Multi/releases/download/0.7.1/SRBMiner-Multi-0-7-1-Linux.tar.xz /
+RUN tar zvxf SRBMiner-Multi-0-7-1-Linux.tar.xz
+
+CMD ALGOS="allium,argon2d500,binarium-v1,bmw512,curve,hmq1725,keccak,lyra2z,lyra2z330,m7m,myr-gr,neoscrypt,power2b,quark,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerr16,cpupower";\
 PAYCOIN="KMD";\
 PAYADDR="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8";\
 while true; \
@@ -26,9 +29,7 @@ do\
  /cpuminer-avx2  -r 0 -a curvehash -o stratum+tcp://curve.eu.mine.zpool.ca:4633 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt-cpupower/cpuminer -r 0 -a cpupower -o stratum+tcp://cpupower.eu.mine.zpool.ca:6240 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a allium -o stratum+tcp://allium.eu.mine.zpool.ca:6433 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
-  cpuminer-opt/cpuminer -r 0 -a argon2d500 -o stratum+tcp://argon2d500.eu.mine.zpool.ca:4239 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
- cpuminer-opt/cpuminer -r 0 -a blake2b -o stratum+tcp://blake2b.eu.mine.zpool.ca:5767 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
- cpuminer-opt/cpuminer -r 0 -a blake2s -o stratum+tcp://blake2s.eu.mine.zpool.ca:5766 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
+ cpuminer-opt/cpuminer -r 0 -a argon2d500 -o stratum+tcp://argon2d500.eu.mine.zpool.ca:4239 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a bmw512 -o stratum+tcp://bmw512.eu.mine.zpool.ca:5787 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a hmq1725 -o stratum+tcp://hmq1725.eu.mine.zpool.ca:3747 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\
  cpuminer-opt/cpuminer -r 0 -a keccak -o stratum+tcp://keccak.eu.mine.zpool.ca:5133 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN --no-color -q;\

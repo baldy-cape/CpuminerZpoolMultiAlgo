@@ -69,26 +69,40 @@ DURATION=600 # how long to test each algo in seconds
 # - skein2
 # - skunk
 # - tribus
+
 # - x11
 # - x13
 # - x16r
+
 # - x16rv2
+#cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a x16rv2 -o stratum+tcp://x16rv2.eu.mine.zpool.ca:3637 -u $PAYADDR -p c=$PAYCOIN
+# not working
+
 # - x16s
+#cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a x16s -o stratum+tcp://x16s.na.mine.zpool.ca:3423 -u $PAYADDR -p c=$PAYCOIN
+# not working 
+
 # - x17
+cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a x17 -o stratum+tcp://x17.eu.mine.zpool.ca:3737 -u $PAYADDR -p c=$PAYCOIN
+# Mar 2021 worked
+
 # - x21s
+# Removed
 
 # - x25x
-# GPU 
-#cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a x25x -o stratum+tcp://x25x.eu.mine.zpool.ca:3423 -u $PAYADDR -p c=$PAYCOIN
+cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a x25x -o stratum+tcp://x25x.eu.mine.zpool.ca:3423 -u $PAYADDR -p c=$PAYCOIN
 
 # - xevan
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a xevan -o stratum+tcp://xevan.eu.mine.zpool.ca:3739 -u $PAYADDR -p c=$PAYCOIN
+# Mar 2021 - works
 
 # - yescrypt
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a yescrypt -o stratum+tcp://yescrypt.eu.mine.zpool.ca:6233 -u $PAYADDR -p c=$PAYCOIN
+# Mar 2021 - works
 
 # - yescryptR32
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a yescryptr32 -o stratum+tcp://yescryptr32.eu.mine.zpool.ca:6343 -u $PAYADDR -p c=$PAYCOIN
+# Mar 2021 - works
 
 # - yespower
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a yespower -o stratum+tcp://yespower.eu.mine.zpool.ca:6234 -u $PAYADDR -p c=$PAYCOIN

@@ -17,7 +17,7 @@ RUN tar xvzf /cpuminer-opt-linux.tar.gz
 RUN git clone https://github.com/binariumpay/cpuminer-easy.git
 RUN cd cpuminer-easy/ && ./build-ubuntu.sh
 
-ADD https://github.com/doktor83/SRBMiner-Multi/releases/download/0.7.1/SRBMiner-Multi-0-7-1-Linux.tar.xz /
+ADD https://github.com/doktor83/SRBMiner-Multi/releases/download/0.5.8/SRBMiner-Multi-0-5-8-Linux.tar.xz /
 RUN tar vxf SRBMiner-Multi-0-5-8-Linux.tar.xz
 
 CMD ALGOS="allium,argon2d500,binarium-v1,bmw512,curve,hmq1725,keccak,lyra2z,lyra2z330,m7m,myr-gr,neoscrypt,power2b,quark,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerr16,cpupower";\

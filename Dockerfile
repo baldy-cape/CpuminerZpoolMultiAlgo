@@ -18,6 +18,10 @@ RUN cd cpuminer-curvehash/; chmod +x autogen.sh build.sh ; ./build.sh
 RUN git clone https://github.com/bubasik/cpuminer-easy-binarium
 RUN cd cpuminer-easy-binarium/ && ./build-ubuntu.sh
 
+
+RUN git clone https://github.com/isotopec-org/isotopec-cpuminer
+RUN cd isotopec-cpuminer/ && ./build.sh
+
 ADD https://raw.githubusercontent.com/baldy-cape/AutomaticAlgoCpuMining/master/test.sh /
 RUN chmod +x /test.sh
 

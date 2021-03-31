@@ -4,9 +4,11 @@ PAYADDR="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8"
 DURATION=600 # how long to test each algo in seconds
 
 # - allium
+# worked Mar 2021
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a allium -o stratum+tcp://allium.eu.mine.zpool.ca:6433 -u$PAYADDR -p c=$PAYCOIN 
 
 # - argon2d4096
+# worked Mar 2021
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a argon2d4096 -o stratum+tcp://argon2d4096.eu.mine.zpool.ca:4240 -u$PAYADDR -p c=$PAYCOIN 
 
 # - argon2d500
@@ -16,6 +18,7 @@ cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a argon2d500 -o stratum+tcp:/
 #GPU only
 
 # - binarium-v1
+# worked 2021
 cpuminer-easy-binarium/cpuminer --time-limit=$DURATION -r 0 -a Binarium_hash_v1 -o stratum+tcp://binarium-v1.eu.mine.zpool.ca:6666 -u $PAYADDR -p c=$PAYCOIN
 
 # - blake2b
@@ -31,6 +34,7 @@ cpuminer-easy-binarium/cpuminer --time-limit=$DURATION -r 0 -a Binarium_hash_v1 
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a bmw512 -o stratum+tcp://bmw512.eu.mine.zpool.ca:5787 -u $PAYADDR -p c=$PAYCOIN  
 
 # - cpupower
+# worked 2021
 cpuminer-opt-cpupower/cpuminer --time-limit=$DURATION -r 0 -a cpupower -o stratum+tcp://cpupower.eu.mine.zpool.ca:6240 -u $PAYADDR -p c=$PAYCOIN  
 
 # - curve
@@ -44,6 +48,7 @@ cpuminer-curvehash/cpuminer --time-limit=$DURATION -r 0 -a curvehash -o stratum+
 # - groestl
 
 # - hmq1725
+# worked 2021
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a hmq1725 -o stratum+tcp://hmq1725.eu.mine.zpool.ca:3747 -u $PAYADDR -p c=$PAYCOIN  
 
 # - keccak
@@ -60,6 +65,7 @@ cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a lyra2z -o stratum+tcp://lyr
 # - lyra2z330
 
 # - m7m
+# worked 2021
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a m7m -o stratum+tcp://m7m.eu.mine.zpool.ca:6033 -u $PAYADDR -p c=$PAYCOIN 
 
 # - megabtx
@@ -69,6 +75,7 @@ cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a m7m -o stratum+tcp://m7m.eu
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a myr-gr -o stratum+tcp://myr-gr.eu.mine.zpool.ca:5433 -u $PAYADDR -p c=$PAYCOIN
 
 # - neoscrypt
+# worked Mar 2021
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a neoscrypt -o stratum+tcp://neoscrypt.eu.mine.zpool.ca:4233 -u $PAYADDR -p c=$PAYCOIN 
 
 # - power2b
@@ -109,7 +116,8 @@ cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a x21s  -o stratum+tcp://x21s
 
 # - x25x
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a x25x -o stratum+tcp://x25x.eu.mine.zpool.ca:3423 -u $PAYADDR -p c=$PAYCOIN
-
+# Mar 2021 - works
+ 
 # - xevan
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a xevan -o stratum+tcp://xevan.eu.mine.zpool.ca:3739 -u $PAYADDR -p c=$PAYCOIN 
 # Mar 2021 - works
@@ -130,6 +138,7 @@ isotopec-cpuminer/cpuminer --time-limit=$DURATION -r 0 -a yespowerIC -o stratum+
 # NOT WORKING
 
 # - yespowerLNC
+# worked 2021
 isotopec-cpuminer/cpuminer --time-limit=$DURATION -r 0 -a yespowerltncg -o stratum+tcp://yespowerLNC.eu.mine.zpool.ca:6245 -u $PAYADDR -p c=$PAYCOIN
 
 # - yespowerR16

@@ -27,15 +27,14 @@ ADD https://raw.githubusercontent.com/baldy-cape/AutomaticAlgoCpuMining/master/t
 RUN chmod +x /test.sh
 
 
-CMD ALGOS="binarium-v1,cpupower,ghostrider,lyra2z330,m7m,power2b,yescrypt,yescryptr32,yespower,yespowerIC,yespowerltncg,yespowerr16";\
+CMD ALGOS="binarium-v1,cpupower,curve,ghostrider,lyra2z330,m7m,power2b,yescrypt,yescryptr32,yespower,yespowerIC,yespowerltncg,yespowerr16";\
 PAYCOIN="DGB";\
 PAYADDR="DDsiPmx2cJmELsYvtwXXJgue6MKTL9qNr5";\
 while true; \
 do\
  cpuminer-easy-binarium/cpuminer -r 0 -a Binarium_hash_v1 -o stratum+tcp://binarium-v1.eu.mine.zpool.ca:6666 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN;\
  cpuminer-opt-cpupower/cpuminer -r 0 -a cpupower -o stratum+tcp://cpupower.eu.mine.zpool.ca:6240 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN;\
- # Curve unreliable
- #cpuminer-curvehash/cpuminer -r 0 -a curvehash -o stratum+tcp://curve.eu.mine.zpool.ca:4633 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN;\
+ cpuminer-curvehash/cpuminer -r 0 -a curvehash -f 0x10000 -o stratum+tcp://curve.eu.mine.zpool.ca:4633 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN;\
  cpuminer-gr/cpuminer -r 0 -a gr -o stratum+tcp://ghostrider.eu.mine.zpool.ca:5354 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN;\
  cpuminer-opt/cpumine -r 0 -a lyra2z330 -o stratum+tcp://lyra2z330.eu.mine.zpool.ca:4563 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN;\
  cpuminer-opt/cpuminer -r 0 -a m7m -o stratum+tcp://m7m.eu.mine.zpool.ca:6033 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN ;\

@@ -1,7 +1,7 @@
 #/bin/bash +x
 PAYCOIN="KMD"
 PAYADDR="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8"
-DURATION=600 # how long to test each algo in seconds
+DURATION=900 # how long to test each algo in seconds
 
 # - allium
 # worked Mar 2021
@@ -41,12 +41,21 @@ cpuminer-opt-cpupower/cpuminer --time-limit=$DURATION -r 0 -a cpupower -o stratu
 cpuminer-curvehash/cpuminer --time-limit=$DURATION -r 0 -a curvehash -o stratum+tcp://curve.eu.mine.zpool.ca:4633 -u $PAYADDR -p c=$PAYCOIN  
 
 # - equihash
+# GPU
 # - equihash125
-# - equihash144
-# - equihash192
-# - ghostrider
-# - groestl
+#GPU
 
+# - equihash144
+# GPU
+# - equihash192
+#GPU
+
+# - ghostrider
+cpuminer-gr/cpuminer --time-limit=$DURATION -r 0 -a gr -o stratum+tcp://ghostrider.eu.mine.zpool.ca:5354 -u $PAYADDR -p c=$PAYCOIN  
+
+# - groestl
+cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a groestl -o stratum+tcp://groestl.eu.mine.zpool.ca:5333 -u $PAYADDR -p c=$PAYCOIN 
+ 
 # - hmq1725
 # worked 2021
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a hmq1725 -o stratum+tcp://hmq1725.eu.mine.zpool.ca:3747 -u $PAYADDR -p c=$PAYCOIN  
@@ -58,19 +67,23 @@ cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a keccak -o stratum+tcp://kec
 # FPGA only
 
 # - lyra2v2
+cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a lyra2rev2 -o stratum+tcp://lyra2v2.na.mine.zpool.ca:4533 -u $PAYADDR -p c=$PAYCOIN  
 
 # - lyra2z
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a lyra2z -o stratum+tcp://lyra2z.eu.mine.zpool.ca:4553 -u $PAYADDR -p c=$PAYCOIN 
 
 # - lyra2z330
-cpuminer-opt/cpumine --time-limit=$DURATION -a lyra2z330 -o stratum+tcp://lyra2z330.eu.mine.zpool.ca:4563 -u $PAYADDR -p c=$PAYCOIN 
+cpuminer-opt/cpumine --time-limit=$DURATION  -r 0 -a lyra2z330 -o stratum+tcp://lyra2z330.eu.mine.zpool.ca:4563 -u $PAYADDR -p c=$PAYCOIN 
 
 # - m7m
 # worked 2021
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a m7m -o stratum+tcp://m7m.eu.mine.zpool.ca:6033 -u $PAYADDR -p c=$PAYCOIN 
 
 # - megabtx
+# GPU 
+
 # - megamec
+#GPU
 
 # - myr-gr
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a myr-gr -o stratum+tcp://myr-gr.eu.mine.zpool.ca:5433 -u $PAYADDR -p c=$PAYCOIN
@@ -86,19 +99,41 @@ cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a power2b -o stratum+tcp://po
 cpuminer-opt/cpuminer  --time-limit=$DURATION -r 0 -a quark -o stratum+tcp://quark.eu.mine.zpool.ca:4033 -u $PAYADDR -p c=$PAYCOIN 
 
 # - qubit
+# GPU
+
 # - scrypt
+cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a scrypt -o stratum+tcp://scrypt.eu.mine.zpool.ca:3433 -u $PAYADDR -p c=$PAYCOIN
+
 # - scryptn11
+# GPU / Abandoned?
+
 # - sha256
+# GPU
+
 # - sha256t
+cpuminer-opt/cpuminer  --time-limit=$DURATION -r 0 -a sha256t -o stratum+tcp://sha256t.eu.mine.zpool.ca:3339 -u $PAYADDR -p c=$PAYCOIN
+ 
 # - sha3d
+ cpuminer-opt/cpuminer  --time-limit=$DURATION -r 0 -a sha3d -o stratum+tcp://sha3d.eu.mine.zpool.ca:3340 -u $PAYADDR -p c=$PAYCOIN 
+ 
 # - skein
+ cpuminer-opt/cpuminer   --time-limit=$DURATION-r 0 -a skein -o stratum+tcp://skein.eu.mine.zpool.ca:4933 -u $PAYADDR -p c=$PAYCOIN 
+ 
 # - skein2
+ cpuminer-opt/cpuminer  --time-limit=$DURATION -r 0 -a skein2 -o stratum+tcp://skein2.eu.mine.zpool.ca:5233 -u $PAYADDR -p c=$PAYCOIN 
+ 
 # - skunk
+ cpuminer-opt/cpuminer  --time-limit=$DURATION -r 0 -a skunk -o stratum+tcp://skunk.eu.mine.zpool.ca:8433 -u $PAYADDR -p c=$PAYCOIN 
+ 
 # - tribus
+ cpuminer-opt/cpuminer  --time-limit=$DURATION -r 0 -a tribus -o stratum+tcp://tribus.eu.mine.zpool.ca:8533 -u $PAYADDR -p c=$PAYCOIN 
 
 # - x11
+ cpuminer-opt/cpuminer   --time-limit=$DURATION -r 0 -a x11 -o stratum+tcp://x11.eu.mine.zpool.ca:3533 -u $PAYADDR -p c=$PAYCOIN 
+ 
 # - x13
-
+ cpuminer-opt/cpuminer   --time-limit=$DURATION -r 0 -a x13 -o stratum+tcp://x13.eu.mine.zpool.ca:3633 -u $PAYADDR -p c=$PAYCOIN 
+ 
 # - x16r
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a x16r -o stratum+tcp://x16r.eu.mine.zpool.ca:3636 -u $PAYADDR -p c=$PAYCOIN 
 

@@ -26,7 +26,7 @@ ADD https://raw.githubusercontent.com/baldy-cape/AutomaticAlgoCpuMining/master/t
 RUN chmod +x /test.sh
 
 
-CMD ALGOS="allium,argon2d4096,argon2d500,binarium-v1,bmw512,cpupower,curve,hmq1725,keccak,lyra2z,m7m,myr-gr,neoscrypt,power2b,quark,qubit,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,,x16r,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerIC,yespowerltncg,yespowerr16";\
+CMD ALGOS="allium,argon2d4096,argon2d500,binarium-v1,bmw512,cpupower,curve,hmq1725,keccak,lyra2z,m7m,myr-gr,neoscrypt,power2b,quark,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,,x16r,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerIC,yespowerltncg,yespowerr16";\
 PAYCOIN="KMD";\
 PAYADDR="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8";\
 while true; \
@@ -46,7 +46,6 @@ do\
  cpuminer-opt/cpuminer -r 0 -a neoscrypt -o stratum+tcp://neoscrypt.eu.mine.zpool.ca:4233 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN ;\
  cpuminer-opt/cpuminer -r 0 -a power2b -o stratum+tcp://power2b.eu.mine.zpool.ca:6242 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN ;\
  cpuminer-opt/cpuminer -r 0 -a quark -o stratum+tcp://quark.eu.mine.zpool.ca:4033 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN ;\
- cpuminer-opt/cpuminer -r 0 -a qubit -o stratum+tcp://qubit.eu.mine.zpool.ca:4733 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN ;\
  cpuminer-opt/cpuminer -r 0 -a scrypt -o stratum+tcp://scrypt.eu.mine.zpool.ca:3433 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN ;\
  cpuminer-opt/cpuminer -r 0 -a sha256t -o stratum+tcp://sha256t.eu.mine.zpool.ca:3339 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN ;\
  cpuminer-opt/cpuminer -r 0 -a sha3d -o stratum+tcp://sha3d.eu.mine.zpool.ca:3340 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN ;\

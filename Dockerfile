@@ -18,7 +18,7 @@ RUN git clone https://github.com/bubasik/cpuminer-easy-binarium
 RUN cd cpuminer-easy-binarium/ && ./build-ubuntu.sh
 
 RUN git clone https://github.com/npq7721/cpuminer-gr.git
-RUN cd puminer-gr/ && ./build.sh 
+RUN cd cpuminer-gr/ && ./build.sh 
 
 RUN git clone https://github.com/isotopec-org/isotopec-cpuminer
 RUN cd isotopec-cpuminer/ && ./build.sh

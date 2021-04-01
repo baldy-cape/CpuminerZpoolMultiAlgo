@@ -63,6 +63,7 @@ cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a keccak -o stratum+tcp://kec
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a lyra2z -o stratum+tcp://lyra2z.eu.mine.zpool.ca:4553 -u $PAYADDR -p c=$PAYCOIN 
 
 # - lyra2z330
+cpuminer-opt/cpumine --time-limit=$DURATION -a lyra2z330 -o stratum+tcp://lyra2z330.eu.mine.zpool.ca:4563 -u $PAYADDR -p c=$PAYCOIN 
 
 # - m7m
 # worked 2021

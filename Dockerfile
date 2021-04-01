@@ -28,8 +28,8 @@ RUN chmod +x /test.sh
 
 
 CMD ALGOS="allium,argon2d4096,argon2d500,binarium-v1,bmw512,cpupower,curve,hmq1725,keccak,lyra2z,m7m,myr-gr,neoscrypt,power2b,quark,scrypt,sha256t,sha3d,skein,skein2,skunk,tribus,x11,x13,,x16r,x16rv2,x16s,x17,x21s,x25x,xevan,yescrypt,yescryptr32,yespower,yespowerIC,yespowerltncg,yespowerr16";\
-PAYCOIN="KMD";\
-PAYADDR="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8";\
+PAYCOIN="DGB";\
+PAYADDR="DDsiPmx2cJmELsYvtwXXJgue6MKTL9qNr5";\
 while true; \
 do\
  cpuminer-opt/cpuminer -r 0 -a allium -o stratum+tcp://allium.eu.mine.zpool.ca:6433 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN;\

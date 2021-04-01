@@ -14,10 +14,11 @@ RUN cd cpuminer-opt-cpupower/ && ./build.sh
 RUN git clone https://github.com/CURVEHASH/cpuminer-curvehash.git
 RUN cd cpuminer-curvehash/; chmod +x autogen.sh build.sh ; ./build.sh
 
-
 RUN git clone https://github.com/bubasik/cpuminer-easy-binarium
 RUN cd cpuminer-easy-binarium/ && ./build-ubuntu.sh
 
+RUN git clone https://github.com/npq7721/cpuminer-gr.git
+RUN cd puminer-gr/ && ./build.sh 
 
 RUN git clone https://github.com/isotopec-org/isotopec-cpuminer
 RUN cd isotopec-cpuminer/ && ./build.sh

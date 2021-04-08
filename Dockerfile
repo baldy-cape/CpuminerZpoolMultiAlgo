@@ -15,6 +15,7 @@ RUN git clone https://github.com/CURVEHASH/cpuminer-curvehash.git
 RUN cd cpuminer-curvehash/; chmod +x autogen.sh build.sh ; ./build.sh
 
 RUN git clone https://github.com/bubasik/cpuminer-easy-binarium
+RUN apt-get install -qy libglib2.0-0 libglib2.0-data libicu66 libxml2 pkg-config shared-mime-info tzdata xdg-user-dirs
 RUN cd cpuminer-easy-binarium/ && ./build-ubuntu.sh
 
 RUN git clone https://github.com/npq7721/cpuminer-gr.git

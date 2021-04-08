@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 LABEL maintainer="laurence.baldwin@gmail.com"
 RUN apt-get update -qq 
-RUN apt-get install -qy build-essential git libtool libjansson-dev libssl-dev libcurl4-openssl-dev libncurses5-dev libgmp-dev automake libz-dev 
+RUN apt-get install -qy build-essential git libtool libjansson-dev libssl-dev libcurl4-openssl-dev libncurses5-dev libgmp-dev automake libz-dev sudo
 
 RUN git clone https://github.com/JayDDee/cpuminer-opt 
 RUN cd cpuminer-opt && ./build.sh  

@@ -30,7 +30,6 @@ RUN chmod +x /test.sh
 CMD ALGOS="binarium-v1=0.09,cpupower=0.9,curve=25,ghostrider=0.13,lyra2z330=0.0006,m7m=0.1,power2b=0.96,yescrypt=4.3,yescryptr32=0.48,yespower=0.9,yespowerIC=0.9,yespowerltncg=0.9,yespowerr16=0.9";\
 PAYCOIN="DGB";\
 PAYADDR="DDsiPmx2cJmELsYvtwXXJgue6MKTL9qNr5";\
-
 while true; \
 do\
  cpuminer-easy-binarium/cpuminer -r 0 -a Binarium_hash_v1 -o stratum+tcp://binarium-v1.eu.mine.zpool.ca:6666 -u $PAYADDR -p $HOSTNAME,$ALGOS,c=$PAYCOIN;\

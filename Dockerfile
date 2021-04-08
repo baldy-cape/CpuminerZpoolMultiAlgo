@@ -27,7 +27,7 @@ ADD https://raw.githubusercontent.com/baldy-cape/AutomaticAlgoCpuMining/master/t
 RUN chmod +x /test.sh
 
 
-CMD ALGOS="binarium-v1=0.98,cpupower,curve,ghostrider,lyra2z330,m7m,power2b,yescrypt,yescryptr32,yespower,yespowerIC,yespowerltncg,yespowerr16";\
+CMD ALGOS="binarium-v1=0.98,cpupower,curve,ghostrider,lyra2z330,m7m,power2b,yescrypt,yescryptr32,yespower=1.5,yespowerIC,yespowerltncg,yespowerr16";\
 PAYCOIN="DGB";\
 PAYADDR="DDsiPmx2cJmELsYvtwXXJgue6MKTL9qNr5";\
 

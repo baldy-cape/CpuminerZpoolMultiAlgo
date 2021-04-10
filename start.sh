@@ -27,7 +27,6 @@ echo "Starting Benchmarks"
 HASH=$(echo "$(/cpuminer-easy-binarium/cpuminer -a Binarium_hash_v1 --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000 / 1000" | bc -l | awk '{printf "%.8f", $0}')
 echo "binarium $HASH MH/s"
 FACTOR="binarium-v1=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
-echo $FACTOR
 unset HASH
 
 HASH=$(echo "$(/cpuminer-opt-cpupower/cpuminer -a cpupower --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
@@ -41,7 +40,8 @@ echo "curve $HASH KH/s"
 FACTOR="$FACTOR,curve=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-HASH=$(echo "$(/cpuminer-gr/cpuminer -a gr --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+# benchmark not reliable, instead mine 
+HASH=$(/cpuminer-gr/cpuminer -a gr  -o stratum+tcp://ghostrider.eu.mine.zpool.ca:5354 --time-limit=60 -u $WALLET -p c=$COIN  --no-color --debug | grep "Miner " | tail -1  | cut -f7 -d" ")
 echo "ghostrider $HASH KH/s"
 FACTOR="$FACTOR,ghostrider=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
@@ -69,8 +69,8 @@ FACTOR="$FACTOR,yescrypt=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}
 unset HASH
 
 HASH=$(echo "$(/cpuminer-opt/cpuminer -a yescryptr32 --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
-echo "yescryptr32 $HASH KH/s"
-FACTOR="$FACTOR,yescryptr32=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
+echo "yescryptR32 $HASH KH/s"
+FACTOR="$FACTOR,yescryptR32=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
 HASH=$(echo "$(/cpuminer-opt/cpuminer -a yespower --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
@@ -89,8 +89,8 @@ FACTOR="$FACTOR,yespowerLNC=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", 
 unset HASH
 
 HASH=$(echo "$(/cpuminer-opt/cpuminer -a yespowerr16 --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
-echo "yespowerr16 $HASH KH/s"
-FACTOR="$FACTOR,yespowerr16=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
+echo "yespowerR16 $HASH KH/s"
+FACTOR="$FACTOR,yespowerR16=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
 echo "Factor settings to be used: $FACTOR"

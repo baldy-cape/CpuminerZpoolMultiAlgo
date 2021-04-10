@@ -29,7 +29,12 @@ echo "binarium $HASH MH/s"
 FACTOR="binarium-v1=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-HASH=$(echo "$(/cpuminer-opt-cpupower/cpuminer -a cpupower --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+for i in {1..3}; do 
+  # Benchmark is bug and randomly gives 0, as a work around try 3 times
+  HASH=$(echo "$(/cpuminer-opt-cpupower/cpuminer -a cpupower --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+  if [ $HASH != "0.00000000" ]; then break; fi 
+  echo "cpupower benchmark failed: Attempt $i" 
+done
 echo "cpupower $HASH KH/s"
 FACTOR="$FACTOR,cpupower=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
@@ -69,7 +74,7 @@ FACTOR="$FACTOR,yescrypt=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}
 unset HASH
 
 HASH=$(echo "$(/cpuminer-opt/cpuminer -a yescryptr32 --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
-echo "yescryptR32 $HASH KH/s"
+echo "yescryptr32 $HASH KH/s"
 FACTOR="$FACTOR,yescryptR32=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
@@ -78,18 +83,28 @@ echo "yespower $HASH KH/s"
 FACTOR="$FACTOR,yespower=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-HASH=$(echo "$(/isotopec-cpuminer/cpuminer -a yespowerIC --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+for i in {1..3}; do
+  # Benchmark is buggy and randomly gives 0, as a work around try 3 times
+  HASH=$(echo "$(/isotopec-cpuminer/cpuminer -a yespowerIC --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+  if [ $HASH != "0.00000000" ]; then break; fi
+  echo "yespowerIC benchmark failed: Attempt $i"
+done
 echo "yespowerIC $HASH KH/s"
 FACTOR="$FACTOR,yespowerIC=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-HASH=$(echo "$(/isotopec-cpuminer/cpuminer -a yespowerltncg --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+for i in {1..5}; do
+  # Benchmark is buggy and randomly gives 0, as a work around try 5 times
+  HASH=$(echo "$(/isotopec-cpuminer/cpuminer -a yespowerltncg --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+  if [ $HASH != "0.00000000" ]; then break; fi
+  echo "yespowerltncg  benchmark failed: Attempt $i"
+done
 echo "yespowerLNC $HASH KH/s"
 FACTOR="$FACTOR,yespowerLNC=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
 HASH=$(echo "$(/cpuminer-opt/cpuminer -a yespowerr16 --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
-echo "yespowerR16 $HASH KH/s"
+echo "yespowerr16 $HASH KH/s"
 FACTOR="$FACTOR,yespowerR16=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 

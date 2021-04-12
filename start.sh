@@ -20,18 +20,20 @@ done
 
 if [  -z "$WALLET" ]; then WALLET="RLHaW85aMae4TBTU8KXgd3utfZQ7pexSY8"; fi
 if [  -z "$COIN" ]; then COIN="KMD"; fi
+BMSEC=90
+BMRETRY=5
 
 echo "Payments will be sent to $COIN $WALLET"
 
 echo "Starting Benchmarks"
-HASH=$(echo "$(/cpuminer-easy-binarium/cpuminer -a Binarium_hash_v1 --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000 / 1000" | bc -l | awk '{printf "%.8f", $0}')
+HASH=$(echo "$(/cpuminer-easy-binarium/cpuminer -a Binarium_hash_v1 --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000 / 1000" | bc -l | awk '{printf "%.8f", $0}')
 echo "binarium $HASH MH/s"
 FACTOR="binarium-v1=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-for i in {1..3}; do 
-  # Benchmark is bug and randomly gives 0, as a work around try 3 times
-  HASH=$(echo "$(/cpuminer-opt-cpupower/cpuminer -a cpupower --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+for i in {1..$BMRETRY}; do 
+  # Benchmark is buggy and randomly gives 0, as a work around try 3 times
+  HASH=$(echo "$(/cpuminer-opt-cpupower/cpuminer -a cpupower --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
   if [ $HASH != "0.00000000" ]; then break; fi 
   echo "cpupower benchmark failed: Attempt $i" 
 done
@@ -40,52 +42,56 @@ FACTOR="$FACTOR,cpupower=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}
 unset HASH
 
 # benchmark not reliable, instead mine for real. 
-HASH=$(/cpuminer-curvehash/cpuminer -a curvehash -f 0x10000 -o stratum+tcp://curve.eu.mine.zpool.ca:4633 --time-limit=60 -u $WALLET -p c=$COIN  --no-color -q | grep "accepted: " | tail -1  | cut -f7 -d" ")
+HASH=$(/cpuminer-curvehash/cpuminer -a curvehash -f 0x10000 -o stratum+tcp://curve.eu.mine.zpool.ca:4633 --time-limit=$BMSEC -u $WALLET -p c=$COIN  --no-color -q | grep "accepted: " | tail -1  | cut -f7 -d" ")
 echo "curve $HASH KH/s"
 FACTOR="$FACTOR,curve=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-# benchmark not reliable, instead mine 
-HASH=$(/cpuminer-gr/cpuminer -a gr  -o stratum+tcp://ghostrider.eu.mine.zpool.ca:5354 --time-limit=60 -u $WALLET -p c=$COIN  --no-color --debug | grep "Miner " | tail -1  | cut -f7 -d" ")
+for i in {1..$BMRETRY}; do
+  # Benchmark is buggy and randomly gives 0, as a work around try 3 times
+  HASH=$(echo "$(/cpuminer-gr/cpuminer -a gr --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000 " | bc -l | awk '{printf "%.8f", $0}')
+  if [ $HASH != "0.00000000" ]; then break; fi
+  echo "ghostrider benchmark failed: Attempt $i"
+done
 echo "ghostrider $HASH KH/s"
 FACTOR="$FACTOR,ghostrider=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
 # zpool uses MH/s for lyra2z330
-HASH=$(echo "$(/cpuminer-opt/cpuminer -a lyra2z330 --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000 / 1000" | bc -l | awk '{printf "%.8f", $0}')
+HASH=$(echo "$(/cpuminer-opt/cpuminer -a lyra2z330 --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000 / 1000" | bc -l | awk '{printf "%.8f", $0}')
 echo "lyra2z330 $HASH MH/s"
 FACTOR="$FACTOR,lyra2z330=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
 # zpool used MH/s for m7m
-HASH=$(echo "$(/cpuminer-opt/cpuminer -a m7m --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000 / 1000" | bc -l | awk '{printf "%.8f", $0}')
+HASH=$(echo "$(/cpuminer-opt/cpuminer -a m7m --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000 / 1000" | bc -l | awk '{printf "%.8f", $0}')
 echo "m7m $HASH MH/s"
 FACTOR="$FACTOR,m7m=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-HASH=$(echo "$(/cpuminer-opt/cpuminer -a power2b --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+HASH=$(echo "$(/cpuminer-opt/cpuminer -a power2b --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
 echo "power2b $HASH KH/s"
 FACTOR="$FACTOR,power2b=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-HASH=$(echo "$(/cpuminer-opt/cpuminer -a yescrypt --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+HASH=$(echo "$(/cpuminer-opt/cpuminer -a yescrypt --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
 echo "yescrypt $HASH KH/s"
 FACTOR="$FACTOR,yescrypt=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-HASH=$(echo "$(/cpuminer-opt/cpuminer -a yescryptr32 --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+HASH=$(echo "$(/cpuminer-opt/cpuminer -a yescryptr32 --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
 echo "yescryptr32 $HASH KH/s"
 FACTOR="$FACTOR,yescryptR32=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-HASH=$(echo "$(/cpuminer-opt/cpuminer -a yespower --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+HASH=$(echo "$(/cpuminer-opt/cpuminer -a yespower --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
 echo "yespower $HASH KH/s"
 FACTOR="$FACTOR,yespower=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-for i in {1..3}; do
+for i in {1..$BMRETRY}; do
   # Benchmark is buggy and randomly gives 0, as a work around try 3 times
-  HASH=$(echo "$(/isotopec-cpuminer/cpuminer -a yespowerIC --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+  HASH=$(echo "$(/isotopec-cpuminer/cpuminer -a yespowerIC --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
   if [ $HASH != "0.00000000" ]; then break; fi
   echo "yespowerIC benchmark failed: Attempt $i"
 done
@@ -93,9 +99,9 @@ echo "yespowerIC $HASH KH/s"
 FACTOR="$FACTOR,yespowerIC=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-for i in {1..5}; do
+for i in {1..$BMRETRY}; do
   # Benchmark is buggy and randomly gives 0, as a work around try 5 times
-  HASH=$(echo "$(/isotopec-cpuminer/cpuminer -a yespowerltncg --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+  HASH=$(echo "$(/isotopec-cpuminer/cpuminer -a yespowerltncg --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
   if [ $HASH != "0.00000000" ]; then break; fi
   echo "yespowerltncg  benchmark failed: Attempt $i"
 done
@@ -103,7 +109,7 @@ echo "yespowerLNC $HASH KH/s"
 FACTOR="$FACTOR,yespowerLNC=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-HASH=$(echo "$(/cpuminer-opt/cpuminer -a yespowerr16 --benchmark --time-limit=60 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
+HASH=$(echo "$(/cpuminer-opt/cpuminer -a yespowerr16 --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000" | bc -l | awk '{printf "%.8f", $0}')
 echo "yespowerr16 $HASH KH/s"
 FACTOR="$FACTOR,yespowerR16=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH

@@ -4,7 +4,9 @@ LABEL maintainer="laurence.baldwin@gmail.com"
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -qq 
-RUN apt-get install -qy build-essential git libtool libjansson-dev libssl-dev libcurl4-openssl-dev libncurses5-dev libgmp-dev automake libz-dev sudo bc vim libglib2.0-0 libglib2.0-data libicu66 libxml2 pkg-config shared-mime-info tzdata xdg-user-dirs autoconf g++ lib32z1-dev
+RUN apt-get update --fix-missing -qq
+RUN apt-get install -qy build-essential git libtool libjansson-dev libssl-dev libcurl4-openssl-dev libncurses5-dev libgmp-dev automake libz-dev sudo \
+ bc vim libglib2.0-0 libglib2.0-data libicu66 libxml2 pkg-config shared-mime-info tzdata xdg-user-dirs autoconf g++ lib32z1-dev
 
 RUN git clone https://github.com/JayDDee/cpuminer-opt 
 RUN cd cpuminer-opt && ./build.sh  

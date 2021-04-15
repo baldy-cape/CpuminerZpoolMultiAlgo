@@ -171,7 +171,6 @@ cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a yespower -o stratum+tcp://y
 
 # - yespowerIC
 isotopec-cpuminer/cpuminer --time-limit=$DURATION -r 0 -a yespowerIC -o stratum+tcp://yespowerIC.eu.mine.zpool.ca:6243 -u $PAYADDR -p c=$PAYCOIN
-# NOT WORKING
 
 # - yespowerLNC
 # worked 2021
@@ -179,4 +178,3 @@ isotopec-cpuminer/cpuminer --time-limit=$DURATION -r 0 -a yespowerltncg -o strat
 
 # - yespowerR16
 cpuminer-opt/cpuminer --time-limit=$DURATION -r 0 -a yespowerr16 -o stratum+tcp://yespowerr16.eu.mine.zpool.ca:6534 -u $PAYADDR -p c=$PAYCOIN
-

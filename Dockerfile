@@ -19,7 +19,7 @@ RUN git clone https://github.com/CURVEHASH/cpuminer-curvehash.git
 RUN cd cpuminer-curvehash/; chmod +x autogen.sh build.sh ; ./build.sh
 
 RUN git clone https://github.com/bubasik/cpuminer-easy-binarium
-RUN if grep -i "AMD Turion" /proc/cpuinfo; then sed -i -e 's/"$FLAGS"/-O3 -g -march=btver1/g' /cpuminer-easy-binarium/src/build-linux.sh; fi 
+RUN if grep -i "AMD Turion" /proc/cpuinfo; then sed -i -e 's/"$FLAGS" CXXFLAGS="$CFLAGS/"-O3 -g -march=btver1 /g' /cpuminer-easy-binarium/src/build-linux.sh; fi 
 RUN cd cpuminer-easy-binarium/ && ./build-ubuntu.sh
 
 RUN git clone https://github.com/npq7721/cpuminer-gr.git

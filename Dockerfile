@@ -13,14 +13,14 @@ RUN cd cpuminer-opt && ./build.sh
 
 RUN git clone https://github.com/cpu-pool/cpuminer-opt-cpupower.git
 RUN chmod +x /cpuminer-opt-cpupower/build.sh
-RUN if grep -i "AMD Turion" /proc/cpuinfo; then cd cpuminer-opt-cpupower/src/&& CFLAGS="-O3 -g -march=btver1  -std=c++11" ./configure --with-curl && \
-  make && cp cpuminer ..; else cd cpuminer-opt-cpupower/ && ./build.sh; fi
+RUN cd cpuminer-opt-cpupower/ && ./build.sh
 
 RUN git clone https://github.com/CURVEHASH/cpuminer-curvehash.git
 RUN cd cpuminer-curvehash/; chmod +x autogen.sh build.sh ; ./build.sh
 
 RUN git clone https://github.com/bubasik/cpuminer-easy-binarium
-RUN cd cpuminer-easy-binarium/ && ./build-ubuntu.sh
+RUN if grep -i "AMD Turion" /proc/cpuinfo; then cd cpuminer-easy-binarium/src/ && CFLAGS="-O3 -g -march=btver1 -std=c++11" ./configure --with-curl && \
+  make && cp cpuminer ..; else cd cpuminer-easy-binarium/ && ./build-ubuntu.sh; fi
 
 RUN git clone https://github.com/npq7721/cpuminer-gr.git
 RUN cd cpuminer-gr/ && ./build.sh 

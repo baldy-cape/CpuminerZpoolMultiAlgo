@@ -19,8 +19,8 @@ RUN git clone https://github.com/CURVEHASH/cpuminer-curvehash.git
 RUN cd cpuminer-curvehash/; chmod +x autogen.sh build.sh ; ./build.sh
 
 RUN git clone https://github.com/bubasik/cpuminer-easy-binarium
-RUN if grep -i "AMD Turion" /proc/cpuinfo; then cd cpuminer-easy-binarium/src/ && chmod +x configure && CFLAGS="-O3 -g -march=btver1 -std=c++11" ./configure --with-curl && \
-  make && cp cpuminer ..; else cd cpuminer-easy-binarium/ && ./build-ubuntu.sh; fi
+RUN if grep -i "AMD Turion" /proc/cpuinfo; then sed -i -e 's/"$FLAGS"/-O3 -g -march=btver1/g' /cpuminer-easy-binarium/src/build-linux.sh; fi 
+RUN cd cpuminer-easy-binarium/ && ./build-ubuntu.sh
 
 RUN git clone https://github.com/npq7721/cpuminer-gr.git
 RUN cd cpuminer-gr/ && ./build.sh 

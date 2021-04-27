@@ -19,7 +19,7 @@ This may take some time as it downloads and compiles all the different versions 
 ```
 $ docker run -d --restart always  --name mining cpuminer -c DGB -w DDsiPmx2cJmELsYvtwXXJgue6MKTL9qNr5
 ```
-Where DDsiPmx2cJmELsYvtwXXJgue6MKTL9qNr5 is your wallet address for payouts and DGB is thay wallets type of coin. 
+Where DDsiPmx2cJmELsYvtwXXJgue6MKTL9qNr5 is your wallet address for payouts and DGB is that wallets type of coin. 
 
 To check the status 
 ```

@@ -5,7 +5,7 @@ Supports a large number of CPU compatible crypto currencies via numerious forks 
 
 Zpool Mining Pool (https://zpool.ca/) has a MultiAlgo (Multiple Algorith https://zpool.ca/multialgo) feature which automatically switches to the most profitable algorith to mine. This is setup and working in this docker image. 
 
-Payouts from zpool are possible in any crypto currency coin that they list but only guarenteed in BTC, LTC. DASH, DGB and KMD.
+Payouts from zpool are possible in any crypto currency coin that they list but only guarenteed in BTC, LTC, DASH, DGB and KMD.
 
 When starting the container, it will benchmark each algorithm before then starting to mine the most profitable. 
 

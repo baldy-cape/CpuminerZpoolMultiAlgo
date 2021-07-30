@@ -67,15 +67,16 @@ echo "curve $HASH KH/s"
 FACTOR="$FACTOR,curve=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
 unset HASH
 
-for i in {1..$BMRETRY}; do
-  # Benchmark is buggy and randomly gives 0, as a work around try 3 times
-  HASH=$(echo "$(/cpuminer-gr/cpuminer -a gr --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000 " | bc -l | awk '{printf "%.8f", $0}')
-  if [ $HASH != "0.00000000" ]; then break; fi
-  echo "ghostrider benchmark failed: Attempt $i"
-done
-echo "ghostrider $HASH KH/s"
-FACTOR="$FACTOR,ghostrider=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
-unset HASH
+# Disable Ghostrider as payout is too slow. 
+#for i in {1..$BMRETRY}; do
+#  # Benchmark is buggy and randomly gives 0, as a work around try 3 times
+#  HASH=$(echo "$(/cpuminer-gr/cpuminer -a gr --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000 " | bc -l | awk '{printf "%.8f", $0}')
+#  if [ $HASH != "0.00000000" ]; then break; fi
+#  echo "ghostrider benchmark failed: Attempt $i"
+#done
+#echo "ghostrider $HASH KH/s"
+#FACTOR="$FACTOR,ghostrider=$(echo $HASH \* 1000 | bc -l | awk '{printf "%.2f", $0}')"
+#unset HASH
 
 HASH=$(echo "$(/cpuminer-opt/cpuminer -a keccakc --benchmark --time-limit=$BMSEC 2>&1 > /dev/null | tail -1) / 1000 / 1000 /1000" | bc -l | awk '{printf "%.8f", $0}')
 echo "keccakc $HASH GH/s"
@@ -190,7 +191,7 @@ do
  /cpuminer-opt/cpuminer -r 0 -a bmw512 -o stratum+tcp://bmw512.eu.mine.zpool.ca:5787 -u $WALLET -p $HOSTNAME,$FACTOR,c=$COIN
  /cpuminer-opt-cpupower/cpuminer -r 0 -a cpupower -o stratum+tcp://cpupower.eu.mine.zpool.ca:6240 -u $WALLET -p $HOSTNAME,$FACTOR,c=$COIN
  /cpuminer-curvehash/cpuminer -r 0 -a curvehash -f 0x10000 -o stratum+tcp://curve.eu.mine.zpool.ca:4633 -u $WALLET -p $HOSTNAME,$FACTOR,c=$COIN
- /cpuminer-gr/cpuminer -r 0 -a gr -o stratum+tcp://ghostrider.eu.mine.zpool.ca:5354 -u $WALLET -p $HOSTNAME,$FACTOR,c=$COIN
+# /cpuminer-gr/cpuminer -r 0 -a gr -o stratum+tcp://ghostrider.eu.mine.zpool.ca:5354 -u $WALLET -p $HOSTNAME,$FACTOR,c=$COIN
  /cpuminer-opt/cpuminer -r 0 -a keccakc -o stratum+tcp://keccakc.eu.mine.zpool.ca:5134 -u $WALLET -p $HOSTNAME,$FACTOR,c=$COIN
  /cpuminer-opt/cpuminer -r 0 -a lyra2rev3 -o stratum+tcp://lyra2v3.eu.mine.zpool.ca:4550 -u $WALLET -p $HOSTNAME,$FACTOR,c=$COIN
  /cpuminer-opt/cpuminer -r 0 -a lyra2z -o stratum+tcp://lyra2z.eu.mine.zpool.ca:4553 -u $WALLET -p $HOSTNAME,$FACTOR,c=$COIN
